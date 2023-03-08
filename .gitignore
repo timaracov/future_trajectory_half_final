@@ -1,3 +1,4 @@
 **/*.example
 **/todo*
 **/__pycache__*
+**/*.csv*
