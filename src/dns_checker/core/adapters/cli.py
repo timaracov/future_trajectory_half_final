@@ -3,11 +3,7 @@ import argparse
 from rich.console import Console
 
 from dns_checker.core.schema import ServerInfo
-from dns_checker.core.utils import (
-    catch_exceptions,
-    csv_to_servers,
-    check_servers
-)
+from dns_checker.core.utils import catch_exceptions, csv_to_servers, check_servers
 
 
 class CliAdapter:
@@ -28,7 +24,9 @@ class CliAdapter:
         for s_info in servers_info:
             self.__print_prettified_server_info(s_info)
 
-    def __print_prettified_server_info(self, server_info: ServerInfo, console=Console()):
+    def __print_prettified_server_info(
+        self, server_info: ServerInfo, console=Console()
+    ):
         console.print(f"[[magenta bold]::{server_info.hostname}::[/magenta bold]]")
 
         for addr in server_info.addr_info:
@@ -54,10 +52,8 @@ class CliAdapter:
                 f"[{color_p}]{port_info:8}[/{color_p}]"
             )
 
-            time_spent = (
-                f"RTT: {addr.time_spent:8.2f} ms")
-            at_datetime = (
-                f"[[bold] {addr.at_datetime:22} [/bold]]")
+            time_spent = f"RTT: {addr.time_spent:8.2f} ms"
+            at_datetime = f"[[bold] {addr.at_datetime:22} [/bold]]"
 
             console.print(
                 f"[blue] [{str(addr.ip):15}]:[{addr.port:4}] [/blue]"
@@ -76,10 +72,12 @@ class CliAdapter:
             prog="Future trajectory - dns checker",
             description=(
                 "This application resolves domain name to "
-                "ip addresses and checks it's availability and opened ports"))
+                "ip addresses and checks it's availability and opened ports"
+            ),
+        )
 
         parser.add_argument(
-            "csv_filename",
-            help="-- name of csv file where domain names are stored")
+            "csv_filename", help="-- name of csv file where domain names are stored"
+        )
 
         return parser

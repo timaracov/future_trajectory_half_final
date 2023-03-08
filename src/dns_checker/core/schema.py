@@ -38,19 +38,18 @@ class ServerInfo:
     addr_info: List[AddressInfo]
 
     def to_dict(self):
-        s_info_as_dict = {
-            "hostname": self.hostname, 
-            "addr_info": []
-        }
+        s_info_as_dict = {"hostname": self.hostname, "addr_info": []}
 
         for a_info in self.addr_info:
-            s_info_as_dict["addr_info"].append({
-                "ip": str(a_info.ip),
-                "port": a_info.port,
-                "is_ip_available": a_info.is_ip_available,
-                "is_port_opened": a_info.is_port_opened,
-                "time_spent": str(a_info.time_spent),
-                "at_datetime": a_info.at_datetime
-            })
+            s_info_as_dict["addr_info"].append(
+                {
+                    "ip": str(a_info.ip),
+                    "port": a_info.port,
+                    "is_ip_available": a_info.is_ip_available,
+                    "is_port_opened": a_info.is_port_opened,
+                    "time_spent": str(a_info.time_spent),
+                    "at_datetime": a_info.at_datetime,
+                }
+            )
 
         return s_info_as_dict

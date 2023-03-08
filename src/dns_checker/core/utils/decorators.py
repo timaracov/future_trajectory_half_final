@@ -14,6 +14,7 @@ def catch_exceptions(function):
             frames = traceback.extract_tb(current_traceback, 100)
             _, _, function_name, _ = tuple(frames[-1])
             Console().print(f"[red]err[/red]::{function_name}::{err}")
+
     return func_wrapper
 
 
@@ -22,5 +23,6 @@ def time_spent(function):
         t_start = time.time()
         result = function(*args, **kwargs)
         t_end = time.time()
-        return result, (t_end-t_start)*1000
+        return result, (t_end - t_start) * 1000
+
     return func_wrapper

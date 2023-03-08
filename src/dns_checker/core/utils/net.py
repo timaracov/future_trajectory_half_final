@@ -15,23 +15,20 @@ def resolve_servers_ip_addrs(servers: list[Server]) -> list[ServerResolved]:
 
         ip_ports = _build_ip_port_pairs(ipv4_addrs, server.ports)
 
-        resolved_servers.append(
-            ServerResolved(server.hostname, addresses=ip_ports))
+        resolved_servers.append(ServerResolved(server.hostname, addresses=ip_ports))
 
     return resolved_servers
 
 
 @time_spent
 def check_if_ip_is_available(ip: IP) -> bool:
-    is_windows_platform = platform.system().lower()=='windows'
-    num_of_packets_param = '-n 1' if is_windows_platform else '-c 1'
+    is_windows_platform = platform.system().lower() == "windows"
+    num_of_packets_param = "-n 1" if is_windows_platform else "-c 1"
     timeout_param = "-W 2"
 
-    return (
-        0 ==
-        subprocess.call(
-            f"ping {timeout_param} {num_of_packets_param} {ip}".split(),
-            stdout=subprocess.DEVNULL)
+    return 0 == subprocess.call(
+        f"ping {timeout_param} {num_of_packets_param} {ip}".split(),
+        stdout=subprocess.DEVNULL,
     )
 
 
@@ -44,8 +41,4 @@ def check_if_port_is_opened(ip: IP, port: int) -> bool:
 
 
 def _build_ip_port_pairs(ips: list[IP], ports: list[int]):
-    return [
-        (ip, port) 
-        for port in ports
-        for ip in ips
-    ]
+    return [(ip, port) for port in ports for ip in ips]

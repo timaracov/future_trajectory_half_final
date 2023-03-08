@@ -20,8 +20,10 @@ class HttpAdapter:
         @fastapi_app.exception_handler(500)
         def except_500(_, exc):
             print(exc)
-            return JSONResponse(content={"message": "Internal Server Error"}, status_code=500)
-        
+            return JSONResponse(
+                content={"message": "Internal Server Error"}, status_code=500
+            )
+
         @catch_exceptions
         @fastapi_app.post("/domain/info")
         async def get_host_info_from_csv(file: fastapi.UploadFile = fastapi.File()):
@@ -36,9 +38,8 @@ class HttpAdapter:
             await self.__delete_csv(file)
 
             return JSONResponse(content=result)
-        
-        uvicorn.run(fastapi_app, host=self.HOST, port=self.PORT)
 
+        uvicorn.run(fastapi_app, host=self.HOST, port=self.PORT)
 
     async def __save_csv(self, file: fastapi.UploadFile):
         with open(str(file.filename), "wb") as f:
@@ -47,5 +48,5 @@ class HttpAdapter:
 
     async def __delete_csv(self, file: fastapi.UploadFile):
         from os import remove
-        remove(str(file.filename))
 
+        remove(str(file.filename))
