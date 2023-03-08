@@ -19,4 +19,4 @@ $ poetry run python -m dns_checker /path/to/csv/file.csv
 ```
 
 To run application as http server, follow steps 1 and 2, then
-uncomment all lines in src/dns_checker/__main__.py
+uncomment all lines in src/dns_checker/__main__.py, and follow step 3
